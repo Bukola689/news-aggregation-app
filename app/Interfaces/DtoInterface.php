@@ -13,6 +13,7 @@ interface DtoInterface
     // an aapi form request is a request that is used to validate and transform incoming data
     // before it is passed to the controller. It is typically used in API endpoints to ensure
     public static function fromApiFormRequest(UserRequest $request): DtoInterface;
+    
 
     // that the data is in the correct format and meets the required validation rules.
     public static function fromModel(Model $model): DtoInterface;

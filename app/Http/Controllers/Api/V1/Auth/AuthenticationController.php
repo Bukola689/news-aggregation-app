@@ -1,8 +1,16 @@
 <?php
 
+
 namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Traits\ApiResponseTrait;
+use App\Services\UserService;
+use App\Http\Requests\UserRequest;
+use App\Http\Requests\LoginRequest;
+use App\Dtos\UserDto;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AuthenticationController extends Controller

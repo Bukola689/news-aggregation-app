@@ -3,7 +3,10 @@
 namespace App\Dtos;
 
 use App\Interfaces\DtoInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UserRequest;
+use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class UserDto implements DtoInterface
@@ -50,6 +53,16 @@ class UserDto implements DtoInterface
         $this->email = $email;
     }
 
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password)
+    {
+        $this->password = Hash::make($password);
+    }
+
     public function getCreatedAt(): Carbon
     {
         return $this->created_at;
@@ -71,4 +84,38 @@ class UserDto implements DtoInterface
         $this->updated_at = $updated_at;
         return $this;
     }
+
+     public static function fromApiFormRequest(UserRequest $request): DtoInterface    
+   {
+      $userDto = new UserDto();
+      $userDto->setName($request->input('name'));
+      $userDto->setEmail($request->input('email'));
+      $userDto->setPassword($request->input('password'));
+      $userDto->setCreatedAt(Carbon::now());
+      $userDto->setUpdatedAt(Carbon::now());
+      return $userDto;
+   }
+
+   public static function fromModel(Model $model): DtoInterface
+   {
+       $userDto = new UserDto();
+       $userDto->setId($model->id);
+       $userDto->setName($model->name);
+       $userDto->setEmail($model->email);
+       $userDto->setPassword($model->password);
+       $userDto->setCreatedAt($model->created_at);
+       $userDto->setUpdatedAt($model->updated_at);
+       return $userDto;
+   }
+
+   public static function toArray(Model $model): array
+   {
+       return [
+           'id' => $model->id,
+           'email' => $model->email,
+           'password' => $model->password,
+           'created_at' => $model->created_at,
+           'updated_at' => $model->updated_at,
+       ];
+   }
 }
