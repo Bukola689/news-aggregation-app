@@ -59,17 +59,17 @@ class Handler extends ExceptionHandler
 
      public function render($request, $e): Response
     {
-        // if ($request->expectsJson() || Str::contains($request->path(), 'api')) {
-        // Log::error($e);
+    //     if ($request->expectsJson() || Str::contains($request->path(), 'api')) {
+    //     Log::error($e);
 
-        // if ($e instanceof AuthenticationException) {
-        //     return $this->apiResponse([
-        //         'message' => 'Unauthorized or expired token, try to login again',
-        //         'success' => false,
-        //         'exception' => $e,
-        //         'error_code' => Response::HTTP_UNAUTHORIZED,
-        //     ], Response::HTTP_UNAUTHORIZED);
-        // }
+    //     if ($e instanceof AuthenticationException) {
+    //         return $this->apiResponse([
+    //             'message' => 'Unauthorized or expired token, try to login again',
+    //             'success' => false,
+    //             'exception' => $e,
+    //             'error_code' => Response::HTTP_UNAUTHORIZED,
+    //         ], Response::HTTP_UNAUTHORIZED);
+    //     }
 
     //     if ($e instanceof NotFoundHttpException) {
     //         return $this->apiResponse([

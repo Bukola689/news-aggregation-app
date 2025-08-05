@@ -9,80 +9,22 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class UserDto implements DtoInterface
+class UserDto
 {
-    private int $id;
+    public $name;
 
-    private string $name;
+    public $email;
 
-    private string $email;
+    public $password;
 
-    private string $password;
-
-    private Carbon $created_at;
-
-    private Carbon $updated_at;
-
-    public function getId(): int
+    public function __construct(array $data)
     {
-        return $this->id;
-    }
+        $this->name = $data['name'];
 
-    public function setId(int $id)
-    {
-        $this->id = $id;
-    }
+        $this->email = $data['email'];
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
+        $this->password = $data['password'];
 
-    public function setName(string $name)
-    {
-        $this->name = $name;
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email)
-    {
-        $this->email = $email;
-    }
-
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password)
-    {
-        $this->password = Hash::make($password);
-    }
-
-    public function getCreatedAt(): Carbon
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(Carbon $created_at)
-    {
-        $this->created_at = $created_at;
-        return $this;
-    }
-
-    public function getUpdatedAt(): Carbon
-    {
-        return $this->updated_at;
-    }
-
-    public function setUpdatedAt(Carbon $updated_at)
-    {
-        $this->updated_at = $updated_at;
-        return $this;
     }
 
      public static function fromApiFormRequest(UserRequest $request): DtoInterface    
@@ -90,9 +32,9 @@ class UserDto implements DtoInterface
       $userDto = new UserDto();
       $userDto->setName($request->input('name'));
       $userDto->setEmail($request->input('email'));
+      $userDto->setPhoneNumber($request->input('phone_number'));
+      //$userDto->setPin($request->input('pin'));
       $userDto->setPassword($request->input('password'));
-      $userDto->setCreatedAt(Carbon::now());
-      $userDto->setUpdatedAt(Carbon::now());
       return $userDto;
    }
 
@@ -102,9 +44,11 @@ class UserDto implements DtoInterface
        $userDto->setId($model->id);
        $userDto->setName($model->name);
        $userDto->setEmail($model->email);
+       $userDto->setPhoneNumber($model->phone_number);
+       $userDto->setPin($model->pin);
        $userDto->setPassword($model->password);
-       $userDto->setCreatedAt($model->created_at);
-       $userDto->setUpdatedAt($model->updated_at);
+       $userDto0>setCreated_at($model->created_at);
+       $userDto->setUpdated_at($model->updated_at);
        return $userDto;
    }
 
@@ -113,6 +57,8 @@ class UserDto implements DtoInterface
        return [
            'id' => $model->id,
            'email' => $model->email,
+           'phone_number' => $model->phone_number,
+           'pin' => $model->pin,
            'password' => $model->password,
            'created_at' => $model->created_at,
            'updated_at' => $model->updated_at,

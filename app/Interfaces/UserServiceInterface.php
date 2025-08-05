@@ -5,14 +5,18 @@ namespace App\interfaces;
 use App\Models\User;
 use App\Dtos\UserDto;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 
 interface UserServiceInterface
 {
-    public function modelQuery(): Builder;
+    public function register(UserDto $userDto);
     
-    public function createUser(UserDto $userDto): Model;
+    public function login(UserDto $userDto);
+    
+    public function logout(Request $request);
 
-    public function getUserById(int $userId): Model;
+    public function user(Request $request);
+
 
 }

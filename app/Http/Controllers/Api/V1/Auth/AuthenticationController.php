@@ -24,8 +24,13 @@ class AuthenticationController extends Controller
 
     public function register(UserRequest $request,UserService $userService): JsonResponse
     {
-        $userDto = UserDto::fromApiFormRequest($request);
-        $user = $this->userService->createUser($userDto);
+        $data = $request->validated();
+
+        $dto = new UserDto($data);
+
+        // Assuming the register method returns a User model or similar
+        $user = $this->userService->register($dto);
+
         return $this->sendSuccess(['user'=> $user,], 'Register Successfull');
     }
 
@@ -40,7 +45,7 @@ class AuthenticationController extends Controller
         // Attempt to log the user in
 
        if (!Auth::attempt($credentials)) {
-            return $this->sendError('Invalid credentials', null, 401);
+            return $this->sendError('The Provided Credentials Are Require', null, 401);
         }
 
         $user = Auth::user();
