@@ -15,9 +15,4 @@ interface UserServiceInterface
 
     public function getUserById(int $userId): Model;
 
-    public function setupPin(User $user, string $pin): Void;
-
-    public function validatePin(int $userId, string $pin): bool;
-
-    public function hasSetPin(User $user): bool;
 }
