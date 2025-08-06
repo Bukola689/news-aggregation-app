@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
          $this->call([
-            // UserTableSeeder::class,
-            // SourcesTableSeeder::class,
-            // CategoriesTableSeeder::class,
-            // AuthorsTableSeeder::class,
-            // ArticlesTableSeeder::class,
+            UserTableSeeder::class,
+            SourcesTableSeeder::class,
+            CategoriesTableSeeder::class,
+            AuthorsTableSeeder::class,
+            ArticlesTableSeeder::class,
         ]);
     }
 }

@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
+use App\Models\Author;
+use App\Models\Source;
+use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\ArticleResource;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -12,7 +17,7 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(): JsonResponse
+    public function index(Request $request)
     {
        $articles = Article::with(['source', 'categories', 'authors'])
             ->withFilters($request->all())
@@ -51,9 +56,11 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article): JsonResponse
+    public function show(Article $article)
     {
-         $article->load(['source', 'categories', 'authors']);
+
+         $article = $article->load(['source', 'categories', 'authors']);
+
         return new ArticleResource($article);
     }
 
