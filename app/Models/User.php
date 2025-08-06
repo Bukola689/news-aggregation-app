@@ -38,4 +38,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+        // app/Models/User.php
+    public function isAdmin(): bool
+    {
+        return $this->email === 'admin@example.com';
+    }
+
+     public function preferredSources()
+    {
+        return $this->belongsToMany(Source::class, 'user_preferred_sources');
+    }
+
+    public function preferredCategories()
+    {
+        return $this->belongsToMany(Category::class, 'user_preferred_categories');
+    }
+
+    public function preferredAuthors()
+    {
+        return $this->belongsToMany(Author::class, 'user_preferred_authors');
+    }
 }

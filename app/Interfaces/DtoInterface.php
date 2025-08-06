@@ -4,6 +4,7 @@ namespace App\Interfaces;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\UserRequest;
 
 

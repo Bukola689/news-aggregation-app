@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-  //  Route::group(['v1'], function() {
+  //  Route::group(['v2'], function() {
 
       Route::group(['prefix'=> 'auth'], function() {
             Route::post('register', [AuthenticationController::class, 'register']);
@@ -30,6 +30,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
             Route::post('logout', [AuthenticationController::class, 'logout']);
             Route::post('/email/verification-notification', [VerifyEmailController::class, 'resendNotification'])->name('verification.send');
             Route::post('reset-password', [ResetPasswordController::class, 'resetPassword']); 
+
+             // Articles
+           Route::get('/articles', [ArticleController::class, 'index']);
+           Route::get('/articles/{article:slug}', [ArticleController::class, 'show']);
+           Route::get('/feed', [ArticleController::class, 'personalizedFeed']);
+    
+         // Preferences
+            Route::get('/preferences', [PreferenceController::class, 'index']);
+            Route::put('/preferences', [PreferenceController::class, 'update']);
+    
+           // Sources, Categories, Authors
+           Route::get('/sources', [ArticleController::class, 'sources']);
+           Route::get('/categories', [ArticleController::class, 'categories']);
+           Route::get('/authors', [ArticleController::class, 'authors']);
  
           });
      });

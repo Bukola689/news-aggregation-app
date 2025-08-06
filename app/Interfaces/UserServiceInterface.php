@@ -10,13 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 
 interface UserServiceInterface
 {
-    public function register(UserDto $userDto);
+    public function modelQuery(): Builder;
     
-    public function login(UserDto $userDto);
-    
-    public function logout(Request $request);
+    public function createUser(UserDto $userDto): Model;
 
-    public function user(Request $request);
-
-
+    public function getUserById(int $userId): Model;
 }
