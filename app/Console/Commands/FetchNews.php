@@ -28,6 +28,7 @@ class FetchNews extends Command
     public function __construct()
     {
         parent::__construct();
+
     }
 
     /**
@@ -37,11 +38,14 @@ class FetchNews extends Command
      */
     public function handle()
     {
-        $this->info('Starting news fetch...');
+        // $this->info('Starting news fetch...');
         
         // Fetch from NewsAPI
+
         $this->info('Fetching from NewsAPI...');
+
         $newsApiService = new NewsApiService();
+        
         $newsApiService->fetchArticles();
         
         // Fetch from The Guardian
