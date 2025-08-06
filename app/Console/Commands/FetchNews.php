@@ -38,7 +38,7 @@ class FetchNews extends Command
      */
     public function handle()
     {
-        // $this->info('Starting news fetch...');
+        $this->info('Starting news fetch...');
         
         // Fetch from NewsAPI
 
